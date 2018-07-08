@@ -1,0 +1,202 @@
+{
+  "name": "Oliverstore",
+  "children": [
+    {
+      "name": "Zone A",
+      "children": [
+        {
+          "name": "Quartier A1",
+          "children": [
+            {
+              "name": "Stores-discount",
+              "satisfaction": 0,
+              "dependsOn": ["API Manager", "ESB", "MicroServices", "Configurateur"],
+              "children": [
+                {
+                  "name": "Site Stores-discount",
+                  "satisfaction": 0.8,
+                  "technos": ["JS", "PHP", "HTML"],
+                  "dependsOn": ["WebApp Product", "WebApp Customer", "WebApp User Account", "WSO2AM", "WSO2AM Legacy", "WSO2ESB", "MuleESB", "WM_Microservice", "RwCache", "Configurateur Engine"],
+                  "host": {                    
+                    "tst": null,
+                    "SRV01": null
+                  }
+                },
+                {
+                  "name": "WebApp Product",
+                  "satisfaction": 0.8,
+                  "technos": ["JS", "HTML"],
+                  "dependsOn": [],
+                  "host": {
+                    "S3": null
+                  }
+                },
+                {
+                  "name": "WebApp Customer",
+                  "satisfaction": 0.8,
+                  "technos": ["JS", "HTML"],
+                  "dependsOn": ["Query Customer"],
+                  "host": {
+                    "S3": null
+                  }
+                },
+                {
+                  "name": "WebApp User Account",
+                  "satisfaction": 0.8,
+                  "technos": ["JS", "HTML"],
+                  "dependsOn": ["Query Customer", "Site Stores-discount"],
+                  "host": {
+                    "S3": null
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zone B",
+      "children": [
+        {
+          "name": "Quartier B1",
+          "children": [
+            {
+              "name": "API Manager",
+              "satisfaction": 0,
+              "dependsOn": ["ESB", "Configurateur"],
+              "children": [
+                {
+                  "name": "WSO2AM",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "XML"],
+                  "dependsOn": ["WSO2ESB", "MuleESB"],
+                  "host": {                    
+                    "BASTION": null,
+                    "tst": null
+                  }
+                },
+                {
+                  "name": "WSO2AM Legacy",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "XML"],
+                  "dependsOn": ["WSO2ESB", "MuleESB", "WSO2AM"],
+                  "host": {                    
+                    "tst": null,
+                    "Docker02": null
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Quartier B2",
+          "children": [
+            {
+              "name": "ESB",
+              "satisfaction": 0,
+              "dependsOn": ["MicroServices", "Configurateur"],
+              "children": [
+                {
+                  "name": "WSO2ESB",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "XML"],
+                  "dependsOn": ["Site Stores-discount", "WSO2AM Legacy", "WM_Microservice", "RwCache", "Configurateur Engine"],
+                  "host": {
+                    "tst": null,
+                    "Docker02": null
+                  }
+                },
+                {
+                  "name": "MuleESB",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "XML"],
+                  "dependsOn": ["Site Stores-discount", "WSO2AM", "WSO2AM Legacy", "WM_Microservice", "RwCache", "Configurateur Engine", "Query Customer"],
+                  "host": {
+                    "BASTION": null,
+                    "tst": null
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zone C",
+      "children": [
+        {
+          "name": "Quartier C1",
+          "children": [
+            {
+              "name": "MicroServices",
+              "satisfaction": 0,
+              "dependsOn": ["Configurateur"],
+              "children": [
+                {
+                  "name": "WM_Microservice",
+                  "satisfaction": 0.8,
+                  "technos": ["JS"],
+                  "dependsOn": ["Configurateur Admin"],
+                  "host": {
+                    "tst": null,
+                    "Docker02": null
+                  }
+                },
+                {
+                  "name": "RwCache",
+                  "satisfaction": 0.8,
+                  "technos": ["JS", "Redis"],
+                  "dependsOn": [],
+                  "host": {
+                    "tst": null,
+                    "Docker02": null
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Zone D",
+      "children": [
+        {
+          "name": "Quartier D1",
+          "children": [
+            {
+              "name": "Configurateur",
+              "satisfaction": 0,
+              "dependsOn": [],
+              "children": [
+                {
+                  "name": "Configurateur Engine",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "HTML"],
+                  "dependsOn": ["Configurateur Admin"],
+                  "host": {
+                    "IASS": null,
+                    "tst": null
+                  }
+                },
+                {
+                  "name": "Configurateur Admin",
+                  "satisfaction": 0.8,
+                  "technos": ["Java", "PHP", "HTML"],
+                  "dependsOn": ["Configurateur Engine"],
+                  "host": {
+                    "IASS": null,
+                    "tst": null
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
