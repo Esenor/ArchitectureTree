@@ -20,7 +20,17 @@
                   "host": {                    
                     "tst": null,
                     "SRV01": null
-                  }
+                  },
+                  "children": [
+                    {
+                      "name": "@getOrders",
+                      "satisfaction": 0.6
+                    },
+                    {
+                      "name": "@getOrder",
+                      "satisfaction": 0.6
+                    }
+                  ]
                 },
                 {
                   "name": "WebApp Product",
@@ -44,7 +54,7 @@
                   "name": "WebApp User Account",
                   "satisfaction": 0.8,
                   "technos": ["JS", "HTML"],
-                  "dependsOn": ["Query Customer", "Site Stores-discount"],
+                  "dependsOn": ["Query Customer", "Site Stores-discount", "@getOrders", "@getOrder"],
                   "host": {
                     "S3": null
                   }
